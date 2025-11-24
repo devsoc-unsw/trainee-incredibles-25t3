@@ -1,31 +1,107 @@
-import { connectToMongo } from './lib/mongoose';
-import { Restaurant } from './models/restaurant.model';
-import { Dish } from './models/dish.model';
-import { Review } from './models/review.model';
+import mongoose from "mongoose";
+import { User } from "./models/user.model";
+import { Restaurant } from "./models/restaurant.model";
+import { Review } from "./models/review.model";
 
 async function seed() {
-  await connectToMongo();
-  console.log('Clearing existing demo data...');
-  await Review.deleteMany({});
-  await Dish.deleteMany({});
-  await Restaurant.deleteMany({});
+  try {
+    await mongoose.connect("mongodb://127.0.0.1:27017/yourdbname");
 
-  console.log('Creating restaurants and dishes...');
-  const r1 = await Restaurant.create({ name: 'Yallah (UNSW)', location: 'Kensington' });
-  const r2 = await Restaurant.create({ name: 'The Square Cafe', location: 'Tower' });
+    console.log("Connected to database.");
 
-  const d1 = await Dish.create({ name: 'HSP', restaurant: r1._id, description: 'Halal snack pack at Yallah' });
-  const d2 = await Dish.create({ name: 'Flat White', restaurant: r2._id, description: 'Strong coffee' });
+    // Clear existing data
+    await Promise.all([
+      User.deleteMany({}),
+      Restaurant.deleteMany({}),
+      Review.deleteMany({}),
+    ]);
 
-  await Review.create({ dish: d1._id, rating: 6, text: 'Decent but could use more sauce' });
-  await Review.create({ dish: d1._id, rating: 8, text: 'Great value' });
-  await Review.create({ dish: d2._id, rating: 9, text: 'Perfect crema' });
+    console.log("Cleared existing collections.");
 
-  console.log('Seed complete.');
-  process.exit(0);
+    // Create Users
+    const users = await User.insertMany([
+      {
+        username: "alice",
+        firstName: "Alice",
+        lastName: "Johnson",
+        email: "alice@example.com",
+        password: "hashed-password-1",
+        xp: 0,
+        badges: [],
+      },
+      {
+        username: "bob",
+        firstName: "Bob",
+        lastName: "Smith",
+        email: "bob@example.com",
+        password: "hashed-password-2",
+        xp: 0,
+        badges: [],
+      },
+    ]);
+
+    console.log("Users seeded.");
+
+    // Create Restaurants
+    const restaurants = await Restaurant.insertMany([
+      {
+        name: "Sushi House",
+        address: {
+          country: "USA",
+          suburb: "Brooklyn",
+          postcode: "11201",
+          streetname: "Main St",
+          addressLine1: "100 Main St",
+        },
+        menuLink: "",
+        phoneNumber: "123-456-7890",
+        website: "",
+        logoFileName: "",
+      },
+      {
+        name: "Pasta Palace",
+        address: {
+          country: "USA",
+          suburb: "Queens",
+          postcode: "11368",
+          streetname: "Broadway Ave",
+          addressLine1: "22 Broadway Ave",
+        },
+        menuLink: "",
+        phoneNumber: "555-123-4567",
+        website: "",
+        logoFileName: "",
+      },
+    ]);
+
+    console.log("Restaurants seeded.");
+
+    // Create Reviews
+    await Review.insertMany([
+      {
+        restaurant: restaurants[0]._id,
+        user: users[0]._id,
+        rating: 5,
+        content: "Amazing place. Great sushi.",
+        date: new Date(),
+      },
+      {
+        restaurant: restaurants[1]._id,
+        user: users[1]._id,
+        rating: 4,
+        content: "Solid pasta. Will return.",
+        date: new Date(),
+      },
+    ]);
+
+    console.log("Reviews seeded.");
+
+    console.log("Database seed complete.");
+    process.exit(0);
+  } catch (err) {
+    console.error("Seed failed:", err);
+    process.exit(1);
+  }
 }
 
-seed().catch((err) => {
-  console.error(err);
-  process.exit(1);
-});
+seed();

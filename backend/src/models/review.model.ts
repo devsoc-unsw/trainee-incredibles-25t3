@@ -1,17 +1,19 @@
-import mongoose, { Schema, Document, Types } from 'mongoose';
+import { Schema, model, Types } from "mongoose";
 
-export interface IReview extends Document {
-  dish: Types.ObjectId;
+export interface IReview {
+  restaurant: Types.ObjectId;
+  user: Types.ObjectId;
   rating: number;
-  text?: string;
-  createdAt: Date;
+  content?: string;
+  date: Date;
 }
 
 const ReviewSchema = new Schema<IReview>({
-  dish: { type: Schema.Types.ObjectId, ref: 'Dish', required: true },
-  rating: { type: Number, required: true },
-  text: { type: String },
-  createdAt: { type: Date, default: () => new Date() }
-});
+  restaurant: { type: Schema.Types.ObjectId, ref: "Restaurant", required: true },
+  user: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  rating: { type: Number, required: true, min: 1, max: 5 },
+  content: { type: String, maxlength: 500 },
+  date: { type: Date, default: () => new Date() },
+}, { timestamps: true });
 
-export const Review = mongoose.model<IReview>('Review', ReviewSchema);
+export const Review = model<IReview>("Review", ReviewSchema);
