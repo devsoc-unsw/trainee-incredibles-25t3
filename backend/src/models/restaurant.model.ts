@@ -13,9 +13,15 @@ export interface IRestaurant {
 const RestaurantSchema = new Schema<IRestaurant>({
   name: { type: String, required: true },
   address: { type: AddressSchema, required: true },
-  menuLink: { type: String },
+  menuLink: {
+    type: String,
+    match: [/^https:\/\//, 'Website must start with https://']
+  },
   phoneNumber: { type: String },
-  website: { type: String },
+  website: {
+    type: String,
+    match: [/^https:\/\//, 'Website must start with https://']
+  },
   logoFileName: { type: String },
 }, { timestamps: true });
 
