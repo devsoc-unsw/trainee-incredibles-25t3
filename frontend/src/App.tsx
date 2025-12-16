@@ -1,4 +1,5 @@
 import React from 'react';
+import RestaurantPage from './RestaurantPage';
 
 import { useEffect, useState } from 'react';
 import { API_BASE } from './api/config';
@@ -46,7 +47,9 @@ export default function App() {
         <h1>Incredibles — Foodie (Demo)</h1>
         <p>Simple demo: list restaurants, view dishes, submit a review.</p>
       </header>
+
       <main style={{ display: 'flex', gap: '1rem', padding: '1rem' }}>
+        <RestaurantPage />
         <section style={{ flex: 1 }}>
           <h2>Restaurants</h2>
           <ul>
