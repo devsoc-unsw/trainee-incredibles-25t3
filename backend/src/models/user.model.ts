@@ -1,33 +1,35 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Schema, model } from "mongoose";
 
-export interface IReview {
-  dishId: string;
-  rating: number;
-  review: string;
-  createdAt: Date;
+export interface IBadge {
+  icon: string;
+  title: string;
 }
 
-export interface IUser extends Document {
-  username: string;
-  email: string;
-  xp: number;
-  badges: string[];
-  reviews: IReview[];
-}
-
-const ReviewSchema = new Schema<IReview>({
-  dishId: { type: String, required: true },
-  rating: { type: Number, required: true },
-  review: { type: String, required: false },
-  createdAt: { type: Date, default: () => new Date() }
+const BadgeSchema = new Schema<IBadge>({
+  icon: { type: String, required: true },
+  title: { type: String, required: true },
 });
+
+export interface IUser {
+  username: string;
+  profilePicture?: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  xp: number;
+  badges: IBadge[];
+}
 
 const UserSchema = new Schema<IUser>({
   username: { type: String, required: true },
+  profilePicture: { type: String },
+  firstName: { type: String, required: true },
+  lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
+  password: { type: String, required: true },
   xp: { type: Number, default: 0 },
-  badges: { type: [String], default: [] },
-  reviews: { type: [ReviewSchema], default: [] }
-});
+  badges: { type: [BadgeSchema], default: [] },
+}, { timestamps: true });
 
-export const User = mongoose.model<IUser>('User', UserSchema);
+export const User = model<IUser>("User", UserSchema);

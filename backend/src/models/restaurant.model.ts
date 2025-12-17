@@ -1,13 +1,28 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Schema, model } from "mongoose";
+import { AddressSchema, IAddress } from "./address.model";
 
-export interface IRestaurant extends Document {
+export interface IRestaurant {
   name: string;
-  location?: string;
+  address: IAddress;
+  menuLink?: string;
+  phoneNumber?: string;
+  website?: string;
+  logoFileName?: string;
 }
 
 const RestaurantSchema = new Schema<IRestaurant>({
   name: { type: String, required: true },
-  location: { type: String }
-});
+  address: { type: AddressSchema, required: true },
+  menuLink: {
+    type: String,
+    match: [/^https:\/\//, 'Website must start with https://']
+  },
+  phoneNumber: { type: String },
+  website: {
+    type: String,
+    match: [/^https:\/\//, 'Website must start with https://']
+  },
+  logoFileName: { type: String },
+}, { timestamps: true });
 
-export const Restaurant = mongoose.model<IRestaurant>('Restaurant', RestaurantSchema);
+export const Restaurant = model<IRestaurant>("Restaurant", RestaurantSchema);
