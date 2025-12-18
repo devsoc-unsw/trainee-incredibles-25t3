@@ -18,11 +18,16 @@ export interface Restaurant {
   }>
 }
 
-export interface DiscoveryRestaurant  {
-  _id: string
-  name: string
-  imageUrl: string
-  rating: number
-  cuisine: string[]
-  tags: string[]
+export interface DiscoveryRestaurant {
+  _id: string;
+  name: string;
+  imageUrl: string;
+  rating: number;
+  reviewCount: number;
+  priceLevel: string;
+  cuisine: string[];
+  address: string;
+  phone: string;
+  hours: string;
+  tags: string[];
 }
