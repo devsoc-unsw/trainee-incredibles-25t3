@@ -5,9 +5,8 @@ import { Dish } from '../models/dish.model';
 
 export const getRestaurants = async (req: Request, res: Response) => {
   try {
-    const list = await Restaurant.find()
-      .select('name cuisine rating imageUrl tags')
-      .lean();
+    const list = await Restaurant.find().lean();
+    console.log("SAMPLE RESTAURANT:", list[0]); 
 
     res.json(list);
   } catch (err) {

@@ -1,71 +1,120 @@
-import { connectToMongo } from './lib/mongoose';
-import { Restaurant } from './models/restaurant.model';
+// backend/src/seed.ts
+import { connectToMongo } from "./lib/mongoose";
+import { Restaurant } from "./models/restaurant.model";
 
 async function seed() {
   await connectToMongo();
-  console.log('Clearing existing demo data...');
+  console.log("Clearing existing demo data...");
   await Restaurant.deleteMany({});
 
   await Restaurant.insertMany([
-  {
-    name: "Yallah Eats",
-    cuisine: ["Middle Eastern"],     // 👈 array now
-    rating: 4.5,
-    imageUrl: "https://images.pexels.com/photos/6287547/pexels-photo-6287547.jpeg",
-    tags: ["trending"],
-  },
-  {
-    name: "Stellini Cafe",
-    cuisine: ["Italian"],
-    rating: 4.8,
-    imageUrl: "https://images.pexels.com/photos/324028/pexels-photo-324028.jpeg",
-    tags: ["trending", "coffee-hit"],
-  },
-  {
-    name: "Stuck Market",
-    cuisine: ["Street Food"],
-    rating: 4.2,
-    imageUrl: "https://images.pexels.com/photos/3738755/pexels-photo-3738755.jpeg",
-    tags: ["trending", "hot-deal"],
-  },
-  {
-    name: "Sunny Brunch Club",
-    cuisine: ["Brunch"],
-    rating: 4.7,
-    imageUrl: "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
-    tags: ["hot-deal"],
-  },
-  {
-    name: "Loft & Latte",
-    cuisine: ["Cafe"],
-    rating: 4.6,
-    imageUrl: "https://images.pexels.com/photos/374885/pexels-photo-374885.jpeg",
-    tags: ["hot-deal", "coffee-hit"],
-  },
-  {
-    name: "Candlelight Bistro",
-    cuisine: ["Modern European"],
-    rating: 4.9,
-    imageUrl: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg",
-    tags: ["new"],
-  },
-  {
-    name: "Riverside Dine",
-    cuisine: ["Fusion"],
-    rating: 4.3,
-    imageUrl: "https://images.pexels.com/photos/6267/menu-restaurant-dining-table.jpg",
-    tags: ["new"],
-  },
-  {
-    name: "Midnight Espresso",
-    cuisine: ["Coffee"],
-    rating: 4.4,
-    imageUrl: "https://images.pexels.com/photos/302899/pexels-photo-302899.jpeg",
-    tags: ["coffee-hit"],
-  },
-]);
+    {
+      name: "Yallah Eats",
+      cuisine: ["Middle Eastern"],
+      rating: 4.6,
+      reviewCount: 520,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/p/AF1QipPfRxXmwJLzuJIUCJoBgTH23g_aGAkDZg2JyJ5E=s1360-w1360-h1020-rw",
+      address: "UNSW Sydney 17 High Street Gate 2 University of New South Wales",
+      phone: "(02) 9662 0000",
+      hours: "9.00 am–9.00 pm",
+      tags: ["trending", "hot-deal"],
+    },
+    {
+      name: "Stellini Pasta Bar",
+      cuisine: ["Italian"],
+      rating: 4.3,
+      reviewCount: 280,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSznNeZ1bgxJKkEtFVMJ_6BPuS7a48hv9F2nDW0QSqAJzEznKJ7bSkzk0Om6C52Omy7qUuEfxeaQY-JcqTWmoMOqMJNbQ-a7zPPVxeQeV2HSYds0BW4VLq7MtFyjdocgj6ECSM3H5A=s1360-w1360-h1020-rw",
+      address: " Gate 2, 11 High St, Kensington NSW 2033",
+      phone: "+61 2 9663 0541",
+      hours: "8.30 am–8.30 pm",
+      tags: ["trending", "coffee-hit"],
+    },
+    {
+      name: "Alleyway Kitchen",
+      cuisine: ["Chinese"],
+      rating: 4.1,
+      reviewCount: 21,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/p/AF1QipMV4j7XaLVkuYB6vOC2Cs-gCTwoIF0mI9OMFqw8=s1360-w1360-h1020-rw",
+      address: "Quad Food Court, Quadrangle Building",
+      phone: "+61 437 519 245",
+      hours: "10.00 am–7.00 pm",
+      tags: ["trending"],
+    },
+    {
+      name: "Nene Chicken UNSW",
+      cuisine: ["Korean"],
+      rating: 3.9,
+      reviewCount: 107,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSxHw4jwtco8KqoTgDH-dKVffHXP51uKq9R_kpqT-kbg36_05az2XvKFW7bmgEjdJ-je9IIe8Urpym6SvQGzhEsRObaP7TC4K7T0gGETsgjnjM_fCeA07aTSvo20bgrh5BLa3GKf1k3KOAzK=s1360-w1360-h1020-rw",
+      address: "Food Court Campus, University of E15, Tenancy 1 Lower Ground, Quadrangle Building, High St, Kensington NSW 2033, Australia",
+      phone: "+61 2 9662 2548",
+      hours: "10.00 am–7.00 pm",
+      tags: ["trending"],
+    },
+    {
+      name: "PappaRich UNSW",
+      cuisine: ["Malaysian"],
+      rating: 4.0,
+      reviewCount: 159,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSyMEoiOokfUXbaQThOnej9YUGLk7kH_UqqUJ8yjrlzt1d2QAjnEnCU_yI8GF3OY3zbrLrzd7fWoggntDbDgknLnQYulxxP1tk9_zDSIKrLHv8Wh-qXA6ruk9XOVJqnfKzrVpzyp=s1360-w1360-h1020-rw",
+      address: "Quadrangle Building, College Rd, Kensington NSW 2052",
+      phone: "+61 2 9662 2548",
+      hours: "10.00 am–7.00 pm",
+      tags: ["hot-deal"],
+    },
+    {
+      name: "El Jannah Randwick",
+      cuisine: ["Middle Eastern"],
+      rating: 4.4,
+      reviewCount: 515,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/p/AF1QipOIAe56E7aqU4Pec59fRR5emKlu7jxznr4vE7nd=s1360-w1360-h1020-rw",
+      address: "141 Belmore Rd, Randwick NSW 2031, Australia",
+      phone: "+61 2 7908 5476",
+      hours: "11.00 am–11.00 pm",
+      tags: ["trending"],
+    },
+    {
+      name: "McDonald's Kingsford",
+      cuisine: ["Fast Food"],
+      rating: 3.3,
+      reviewCount: 4018,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwLbrEGm_pn--ESl9wz5XlCCxq_k8qdtmzj0DNg1eYFHvR7YB1AjMK6KycZ8s8s8YDgTpdc5G6dWBFr7E9uPOONkwfEEQszIP8mrva_blHb9bP6CY18k7CgKg2wptoCY0d6jgKw=s1360-w1360-h1020-rw",
+      address: "10 Barker St, Kingsford NSW 2032, Australia",
+      phone: "+61 2 9662 1492",
+      hours: "24 hours",
+      tags: ["hot-deal"],
+    },
+    {
+      name: "Coffee On Campus",
+      cuisine: ["Cafe"],
+      rating: 3.5,
+      reviewCount: 171,
+      priceLevel: "$",
+      imageUrl:
+        "https://lh3.googleusercontent.com/gps-cs-s/AG0ilSwqQI4EhiO0nS55oAGoRgY5Li4FGAEzNIinzySH9y5hs5C_7bNCUkYBFQr2CTayIBasyBAjOfuVNO-gObv3n7xFMKfEDTmEWgisfr8A6ceFiRgGZwvIOVRfJlvlUDY9KdCaCH28MA=s1360-w1360-h1020-rw",
+      address: "Ainsworth Building (J17, Engineering Rd, Kensington NSW 2033",
+      phone: "+61 2 9697 0099",
+      hours: "6.00 am–2.30 pm",
+      tags: ["new", "coffee-hit"],
+    },
+  ]);
 
-  console.log('Seed complete.');
+  console.log("Seed complete.");
   process.exit(0);
 }
 
