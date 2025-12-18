@@ -36,7 +36,7 @@ Prerequisites
 Quick start (developer)
 
 1) Backend — create local env and run
-
+make sure you have mongodb-community installed if you want to run the db locally. then, using npm run seed should work once mongo-dbcommunity is running.
 ```bash
 cd backend
 cp .env.example .env

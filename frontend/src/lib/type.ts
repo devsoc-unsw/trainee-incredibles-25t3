@@ -26,8 +26,17 @@ export interface DiscoveryRestaurant {
   reviewCount: number;
   priceLevel: string;
   cuisine: string[];
-  address: string;
+  address: {
+    country: string;
+    suburb: string;
+    postcode: string;
+    streetname: string;
+    addressLine1: string;
+    addressLine2?: string;
+  };
+  addressDisplay: string;
   phone: string;
   hours: string;
   tags: string[];
 }
+

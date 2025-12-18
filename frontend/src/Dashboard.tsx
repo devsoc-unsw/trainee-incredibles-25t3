@@ -184,7 +184,7 @@ const RestaurantDetailsSheet: React.FC<RestaurantDetailsSheetProps> = ({
                   <p className="mb-1 font-semibold">Address</p>
                   <div className="flex items-start gap-2 text-muted-foreground">
                     <MapPin className="mt-0.5 h-4 w-4" />
-                    <span>{restaurant.address}</span>
+                    <span>{restaurant.addressDisplay}</span>
                   </div>
                 </div>
 

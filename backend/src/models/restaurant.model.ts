@@ -1,5 +1,5 @@
-// backend/src/models/restaurant.model.ts
 import mongoose, { Schema, Document } from "mongoose";
+import { AddressSchema, IAddress } from "./address.model";
 
 export interface IRestaurant extends Document {
   name: string;
@@ -8,7 +8,8 @@ export interface IRestaurant extends Document {
   reviewCount: number;
   priceLevel: string;
   imageUrl: string;
-  address: string;
+  address: IAddress;
+  addressDisplay: string;
   phone: string;
   hours: string;
   tags: string[];
@@ -21,7 +22,11 @@ const RestaurantSchema = new Schema<IRestaurant>({
   reviewCount: { type: Number, required: true },
   priceLevel: { type: String, required: true },
   imageUrl: { type: String, required: true },
-  address: { type: String, required: true },
+
+  address: { type: AddressSchema, required: true },
+
+  addressDisplay: { type: String, required: true },
+
   phone: { type: String, required: true },
   hours: { type: String, required: true },
   tags: { type: [String], default: [] },
