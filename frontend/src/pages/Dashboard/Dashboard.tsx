@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { API_BASE } from "./api/config";
 import type {  DiscoveryRestaurant } from "./lib/type";
-import Sidebar from "./Sidebar";
+import Sidebar from "./components/Sidebar";
 import { Button } from "./components/ui/button";
 import {
   Sheet,

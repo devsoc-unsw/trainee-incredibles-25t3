@@ -1,8 +1,8 @@
 import * as React from "react";
 import { NavLink } from "react-router-dom";
 import { Home, Compass, User, Search, RefreshCw } from "lucide-react";
-import { Button } from "./components/ui/button";
-import { cn } from "./lib/utils";
+import { Button } from "./ui/button";
+import { cn } from "../lib/utils";
 
 const navItems = [
   { label: "For You", to: "/", icon: Home },
