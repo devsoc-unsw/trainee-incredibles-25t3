@@ -1,7 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Dashboard from '@/pages/dashboard/Dashboard';
 import RestaurantPage from '@/pages/restaurantPage/RestaurantPage';
-import SearchPage from '@/pages/search/SearchPage';
+import Search from '@/pages/search/Search';
 
 export default function App() {
 
@@ -10,7 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Dashboard />} />
         <Route path="/restaurant" element={<RestaurantPage />} />
-        <Route path="/search" element={<SearchPage />} />
+        <Route path="/search" element={<Search />} />
       </Routes>
     </div>
   );

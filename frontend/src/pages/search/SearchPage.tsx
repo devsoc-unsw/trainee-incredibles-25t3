@@ -99,103 +99,100 @@ export default function SearchPage() {
   }
 
   return (
-    <RestaurantFilterProvider>
-
-      <div className="flex flex-col">
-        {/* Search + Sort */}
-        <div className="flex flex-row">
-          <Input
-            value={searchTerm}
-            placeholder="Search..."
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <Card>
-            <CardHeader>
-              Sort By
-            </CardHeader>
-            <CardContent>
-              <div className="flex flex-row">
-                <Button>
-                  Most Popular
-                </Button>
-                <Button>
-                  Highest Rated
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Filters + Results */}
-        <div className="flex flex-row">
-          <Card>
-            <CardHeader>
-              Filters
-            </CardHeader>
-            <CardDescription>
-              Select filters you want to apply to your search
-            </CardDescription>
-            <CardContent>
-              {/* Cuisine */}
-              <SearchFilterDropdown 
-                label="cuisine"
-                value={cuisine}
-                setValue={setCuisine}
-                open={cuisineSelectOpen}
-                setOpen={setCuisineSelectOpen}
-                valOptions={CuisineOptions}
-              />
-
-              {/* Price */}
-              <SearchFilterDropdown 
-                label="price"
-                value={price}
-                setValue={setPrice}
-                open={priceSelectOpen}
-                setOpen={setPriceSelectOpen}
-                valOptions={PriceOptions}
-              />
-
-              {/* Dietary */}
-              <SearchFilterDropdown 
-                label="dietary"
-                value={dietary}
-                setValue={setDietary}
-                open={dietarySelectOpen}
-                setOpen={setDietarySelectOpen}
-                valOptions={DietaryOptions}
-              />
-            </CardContent>
-
-            <CardFooter>
-              <Button onClick={clearFilters}>
-                Clear Filters
+    <div className="flex flex-col">
+      {/* Search + Sort */}
+      <div className="flex flex-row">
+        <Input
+          value={searchTerm}
+          placeholder="Search..."
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+        <Card>
+          <CardHeader>
+            Sort By
+          </CardHeader>
+          <CardContent>
+            <div className="flex flex-row">
+              <Button>
+                Most Popular
               </Button>
-              {/* Clear button, Apply Filters button (don't really need it, we can use the SearchContext to make it responsive) */}
-            </CardFooter>
-          </Card>
-
-          <div className="grid grid-cols-4">
-            { searchResults.length === 0 ? (
-                <span>No restaurants found</span>
-              ) : (
-                searchResults.map((restaurant) => (
-                  <Card>
-                    <CardTitle>
-                      {restaurant.name}
-                    </CardTitle>
-                    <CardContent>
-                      <span>{restaurant.cuisine}</span>
-                      <span>{restaurant.rating}</span>
-                      <span>{restaurant.priceLevel}</span>
-                    </CardContent>
-                  </Card>
-                ))
-              )}
-          </div>
-
-        </div>
+              <Button>
+                Highest Rated
+              </Button>
+            </div>
+          </CardContent>
+        </Card>
       </div>
-    </RestaurantFilterProvider>
-  )
+
+      {/* Filters + Results */}
+      <div className="flex flex-row">
+        <Card>
+          <CardHeader>
+            Filters
+          </CardHeader>
+          <CardDescription>
+            Select filters you want to apply to your search
+          </CardDescription>
+          <CardContent>
+            {/* Cuisine */}
+            <SearchFilterDropdown 
+              label="cuisine"
+              value={cuisine}
+              setValue={setCuisine}
+              open={cuisineSelectOpen}
+              setOpen={setCuisineSelectOpen}
+              valOptions={CuisineOptions}
+            />
+
+            {/* Price */}
+            <SearchFilterDropdown 
+              label="price"
+              value={price}
+              setValue={setPrice}
+              open={priceSelectOpen}
+              setOpen={setPriceSelectOpen}
+              valOptions={PriceOptions}
+            />
+
+            {/* Dietary */}
+            <SearchFilterDropdown 
+              label="dietary"
+              value={dietary}
+              setValue={setDietary}
+              open={dietarySelectOpen}
+              setOpen={setDietarySelectOpen}
+              valOptions={DietaryOptions}
+            />
+          </CardContent>
+
+          <CardFooter>
+            <Button onClick={clearFilters}>
+              Clear Filters
+            </Button>
+            {/* Clear button, Apply Filters button (don't really need it, we can use the SearchContext to make it responsive) */}
+          </CardFooter>
+        </Card>
+
+        <div className="grid grid-cols-4">
+          { searchResults.length === 0 ? (
+              <span>No restaurants found</span>
+            ) : (
+              searchResults.map((restaurant) => (
+                <Card>
+                  <CardTitle>
+                    {restaurant.name}
+                  </CardTitle>
+                  <CardContent>
+                    <span>{restaurant.cuisine}</span>
+                    <span>{restaurant.rating}</span>
+                    <span>{restaurant.priceLevel}</span>
+                  </CardContent>
+                </Card>
+              ))
+            )}
+        </div>
+
+      </div>
+    </div>
+  );
 }
