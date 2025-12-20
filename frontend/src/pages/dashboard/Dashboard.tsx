@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { API_BASE } from "./api/config";
-import type {  DiscoveryRestaurant } from "./lib/type";
-import Sidebar from "./components/Sidebar";
-import { Button } from "./components/ui/button";
+import { API_BASE } from "@/api/config";
+import type {  DiscoveryRestaurant } from "@/lib/type";
+import Sidebar from "@/components/Sidebar";
+import { Button } from "@/components/ui/button";
 import {
   Sheet,
   SheetContent,
   SheetHeader,
   SheetTitle,
   SheetClose,
-} from "./components/ui/sheet";
+} from "@/components/ui/sheet";
 import { MapPin, Phone, Clock, Star, X } from "lucide-react";
 
 
