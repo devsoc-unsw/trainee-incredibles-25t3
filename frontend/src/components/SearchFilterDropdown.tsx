@@ -70,7 +70,7 @@ export function SearchFilterDropdown({
             variant="outline"
             role="combobox"
             aria-expanded={open}
-            className="w-[200px] justify-between"
+            className="w-[250px] justify-between"
           >
             {value
               ? valOptions.find((curr) => curr === value)
