@@ -9,7 +9,8 @@ import {
   CardContent,
   CardDescription,
   CardFooter,
-  CardHeader
+  CardHeader,
+  CardTitle
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { RestaurantFilterProvider, useRestaurantFilter } from "@/contexts/RestaurantFilterContext";
@@ -59,13 +60,22 @@ export default function SearchPage() {
   const restaurants = [
     {
       id: "0",
-      name: "Home Ground"
+      name: "Home Ground",
+      cuisine: "Coffee",
+      rating: 4,
+      priceLevel: "moderate"
     }, {
       id: "1",
       name: "Yallah Eats",
+      cuisine: "Lebanese",
+      rating: 4.5,
+      priceLevel: "cheap"
     }, {
       id: "2",
-      name: "The Little Marionette"
+      name: "The Little Marionette",
+      cuisine: "Coffee",
+      rating: 4,
+      priceLevel: "expensive"
     }
   ];
 
@@ -158,8 +168,23 @@ export default function SearchPage() {
             </CardFooter>
           </Card>
 
-          <div>
-            {/* RESULTS */}
+          <div className="grid grid-cols-4">
+            { searchResults.length === 0 ? (
+                <span>No restaurants found</span>
+              ) : (
+                searchResults.map((restaurant) => (
+                  <Card>
+                    <CardTitle>
+                      {restaurant.name}
+                    </CardTitle>
+                    <CardContent>
+                      <span>{restaurant.cuisine}</span>
+                      <span>{restaurant.rating}</span>
+                      <span>{restaurant.priceLevel}</span>
+                    </CardContent>
+                  </Card>
+                ))
+              )}
           </div>
 
         </div>
