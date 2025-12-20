@@ -88,9 +88,9 @@ export default function SearchPage() {
     );
   }, [searchTerm, restaurants]);
 
-  useEffect(() => {
-    setFilteredRestaurantIds(searchResults.map(c => c.id));
-  }, [searchTerm, searchResults, setFilteredRestaurantIds]);
+  // useEffect(() => {
+  //   setFilteredRestaurantIds(searchResults.map(c => c.id));
+  // }, [searchTerm, searchResults, setFilteredRestaurantIds]);
 
   const clearFilters = () => {
     setPrice("");
@@ -99,34 +99,17 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="flex flex-col">
-      {/* Search + Sort */}
-      <div className="flex flex-row">
+    <div className="flex flex-row p-9 gap-4">
+      {/* Search + Filters */}
+      <div className="flex flex-col h-full gap-4">
         <Input
+          className="rounded-3xl"
           value={searchTerm}
           placeholder="Search..."
           onChange={(e) => setSearchTerm(e.target.value)}
         />
-        <Card>
-          <CardHeader>
-            Sort By
-          </CardHeader>
-          <CardContent>
-            <div className="flex flex-row">
-              <Button>
-                Most Popular
-              </Button>
-              <Button>
-                Highest Rated
-              </Button>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
 
-      {/* Filters + Results */}
-      <div className="flex flex-row">
-        <Card className="p-4">
+        <Card className="h-full border-0 shadow-2xl rounded-3xl">
           <CardHeader>
             <CardTitle>
               Filters
@@ -135,7 +118,7 @@ export default function SearchPage() {
               Select filters you want to apply to your search
             </CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="flex flex-col gap-4">
             {/* Cuisine */}
             <SearchFilterDropdown 
               label="Cuisine"
@@ -174,20 +157,37 @@ export default function SearchPage() {
             {/* Clear button, Apply Filters button (don't really need it, we can use the SearchContext to make it responsive) */}
           </CardFooter>
         </Card>
+      </div>
 
-        <div className="grid grid-cols-4">
+      {/* Sort + Results */}
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-row gap-2">
+          <Button variant="ghost">
+            Sort by:
+          </Button>
+          <Button className="rounded-3xl">
+            Most Popular
+          </Button>
+          <Button className="rounded-3xl">
+            Highest Rated
+          </Button>
+        </div>
+        
+        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">
           { searchResults.length === 0 ? (
               <span>No restaurants found</span>
             ) : (
               searchResults.map((restaurant) => (
-                <Card>
-                  <CardTitle>
-                    {restaurant.name}
-                  </CardTitle>
+                <Card className="rounded-3xl min-h-[300px]">
+                  <CardHeader>
+                    <CardTitle>
+                      {restaurant.name}
+                    </CardTitle>
+                  </CardHeader>
                   <CardContent>
-                    <span>{restaurant.cuisine}</span>
-                    <span>{restaurant.rating}</span>
-                    <span>{restaurant.priceLevel}</span>
+                    <div>{restaurant.cuisine}</div>
+                    <div>{restaurant.rating}</div>
+                    <div>{restaurant.priceLevel}</div>
                   </CardContent>
                 </Card>
               ))
