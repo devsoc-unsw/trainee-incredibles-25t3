@@ -151,7 +151,7 @@ export default function SearchPage() {
           onChange={(e) => setSearchTerm(e.target.value)}
         />
 
-        <Card className="h-full border-0 shadow-xl rounded-3xl">
+        <Card className="h-full shadow-xl rounded-3xl">
           <CardHeader>
             <CardTitle>
               Filters
