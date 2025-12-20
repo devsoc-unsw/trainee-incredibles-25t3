@@ -1,6 +1,8 @@
 "use client"
 
 import { API_BASE } from "@/api/config";
+import RestaurantCard from "@/components/restaurant/RestaurantCard";
+import RestaurantDetailsSheet from "@/components/restaurant/RestaurantDetailsSheet";
 /* --------------------------------- Imports -------------------------------- */
 
 import { SearchFilterDropdown } from "@/components/SearchFilterDropdown";
@@ -139,7 +141,7 @@ export default function SearchPage() {
   }
 
   return (
-    <div className="flex flex-row p-4 gap-4">
+    <div className="w-full flex flex-row p-4 gap-4">
       {/* Search + Filters */}
       <div className="flex flex-col h-full gap-4 w-[350px]">
         <Input
@@ -231,29 +233,16 @@ export default function SearchPage() {
         </div>
 
         <ScrollArea>
-          <div className="w-full grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 gap-2">
             { searchResults.length === 0 ? (
                 <span>No restaurants found</span>
               ) : (
                 searchResults.map((restaurant) => (
-                  <Card className="rounded-3xl min-h-[300px]" key={restaurant._id}>
-                    <CardHeader>
-                      <CardTitle className="text-xl">
-                        {restaurant.name}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div>
-                        <b>Cuisine: </b>{restaurant.cuisine}
-                      </div>
-                      <div>
-                        <b>Rating: </b>{restaurant.rating}
-                      </div>
-                      <div>
-                        <b>Price: </b>{restaurant.priceLevel}
-                      </div>
-                    </CardContent>
-                  </Card>
+                  <RestaurantCard
+                    key={restaurant._id}
+                    restaurant={restaurant}
+                    onClick={() => setSelected(restaurant)}
+                  />
                 ))
               )}
           </div>
@@ -261,6 +250,13 @@ export default function SearchPage() {
         </ScrollArea>
 
       </div>
+      <RestaurantDetailsSheet
+        restaurant={selected}
+        open={!!selected}
+        onOpenChange={(open) => {
+          if (!open) closeDetails();
+        }}
+      />
     </div>
   );
 }
