@@ -15,7 +15,6 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
-import { Toggle } from "@/components/ui/toggle";
 import { useRestaurantFilter } from "@/contexts/RestaurantFilterContext";
 import { DiscoveryRestaurant } from "@/lib/type";
 import { cn } from "@/lib/utils";
@@ -23,26 +22,12 @@ import { useEffect, useMemo, useState } from "react";
 
 /* ------------------------------- Demo Types ------------------------------- */
 
-const CuisineOptions = [
-  "Thai",
-  "Chinese",
-  "Japanese",
-  "Indian",
-  "Korean",
-];
-
 const DietaryOptions = [
   "Vegetarian",
   "Vegan",
   "Gluten-free",
   "Halal",
   "Dairy-free",
-];
-
-const PriceOptions = [
-  "$",
-  "$$",
-  "$$$",
 ];
 
 /* -------------------------------------------------------------------------- */
@@ -60,6 +45,11 @@ export default function SearchPage() {
   const [dietary, setDietary] = useState("");
   const [dietarySelectOpen, setDietarySelectOpen] = useState(false);
 
+  // Filter Options
+  const [cuisineOptions, setCuisineOptions] = useState<string[]>([]);
+  const [priceOptions, setPriceOptions] = useState<string[]>([]);
+  const [dietaryOptions, setDietaryOptions] = useState<string[]>([]);
+
   // Sorting States
   const [popularSort, setPopularSort] = useState(false);
   const [ratingSort, setRatingSort] = useState(false);
@@ -69,6 +59,7 @@ export default function SearchPage() {
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState<DiscoveryRestaurant | null>(null);
 
+  // pulls restaurants data from db
   useEffect(() => {
     fetch(`${API_BASE}/restaurants`)
       .then((r) => r.json())
@@ -76,9 +67,28 @@ export default function SearchPage() {
       .catch(console.error)
       .finally(() => setLoading(false));
   }, []);
+
+  useEffect(() => {
+    // get all unique cuisines
+    const uniqueCuisines: string[] = [];
+    restaurants.forEach((r) => {
+      r.cuisine.forEach((cuisine) => {
+        if (!uniqueCuisines.includes(cuisine)) uniqueCuisines.push(cuisine);
+      })
+    });
+    setCuisineOptions(uniqueCuisines);
+
+    // get all unique prices
+    const uniquePrices: string[] = [];
+    restaurants.forEach((r) => {
+      if (!uniquePrices.includes(r.priceLevel)) uniquePrices.push(r.priceLevel);
+    });
+    setPriceOptions(uniquePrices);
+  }, [restaurants]);
   
   const closeDetails = () => setSelected(null);
 
+  // takes the database query and filters + sorts it
   const searchResults = useMemo(() => {
     if (popularSort) {
       restaurants.sort((a, b) => b.reviewCount - a.reviewCount);
@@ -93,10 +103,10 @@ export default function SearchPage() {
         r.name.toLowerCase().includes(searchTerm.trim().toLowerCase());
       
       const matchesCuisine = !cuisine || 
-        r.cuisine.includes(cuisine.toLowerCase());
+        r.cuisine.includes(cuisine);
       
       const matchesPrice = !price || 
-        r.priceLevel.toLowerCase().includes(price.toLowerCase());
+        r.priceLevel.toLowerCase().includes(price);
       
       const matchesDietary = !dietary || 
         r.tags.includes(dietary);
@@ -156,7 +166,7 @@ export default function SearchPage() {
               setValue={setCuisine}
               open={cuisineSelectOpen}
               setOpen={setCuisineSelectOpen}
-              valOptions={CuisineOptions}
+              valOptions={cuisineOptions}
             />
 
             {/* Price */}
@@ -166,7 +176,7 @@ export default function SearchPage() {
               setValue={setPrice}
               open={priceSelectOpen}
               setOpen={setPriceSelectOpen}
-              valOptions={PriceOptions}
+              valOptions={priceOptions}
             />
 
             {/* Dietary */}
@@ -195,25 +205,26 @@ export default function SearchPage() {
           <Button variant="ghost" className="rounded-3xl">
             Sort by:
           </Button>
-          <Toggle
-            className={cn("rounded-3xl", !popularSort && "bg-none")}
+          <Button
+            variant="secondary"
+            className={cn("rounded-3xl", popularSort && "bg-gray-300")}
             onClick={() => {
               setPopularSort(!popularSort);
               setRatingSort(false);
             }}
-            
           >
             Most Popular
-          </Toggle>
-          <Toggle
-            className={cn("rounded-3xl", !ratingSort && "bg-none")}
+          </Button>
+          <Button
+            variant="secondary"
+            className={cn("rounded-3xl", ratingSort && "bg-gray-300")}
             onClick={() => {
               setRatingSort(!ratingSort);
               setPopularSort(false);
             }}
           >
             Highest Rated
-          </Toggle>
+          </Button>
           <Button className="rounded-3xl" onClick={clearSorts}>
             Clear
           </Button>
