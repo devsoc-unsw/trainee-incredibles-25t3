@@ -193,7 +193,7 @@ export default function SearchPage() {
           </CardContent>
 
           <CardFooter>
-            <Button onClick={clearFilters}>
+            <Button onClick={clearFilters} className="rounded-3xl">
               Clear Filters
             </Button>
             {/* Clear button, Apply Filters button (don't really need it, we can use the SearchContext to make it responsive) */}
