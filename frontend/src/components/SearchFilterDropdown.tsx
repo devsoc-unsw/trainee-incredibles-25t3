@@ -33,7 +33,7 @@ import {
 /**
  * 
  * @param label this is what you want to call the dropdown. E.g., if you're filtering
- * based on "price", you'd call this "price". Only lowercase.
+ * based on "price", you'd call this "price". First letter uppercase pls.
  * @param value this is where the current value of the filter is stored. useState
  * @param setValue this is how you set the value. useState
  * @param open this decides if the dropdown is visible or not. useState
@@ -80,9 +80,9 @@ export function SearchFilterDropdown({
         </PopoverTrigger>
         <PopoverContent className="w-[200px] p-0">
           <Command>
-            <CommandInput placeholder={`Search ${label} options...`} />
+            <CommandInput placeholder={`Search ${label} Options...`} />
             <CommandList>
-              <CommandEmpty>No {label} option found.</CommandEmpty>
+              <CommandEmpty>No {label} Option Found.</CommandEmpty>
               <CommandGroup>
                 {valOptions.map((curr) => (
                   <CommandItem

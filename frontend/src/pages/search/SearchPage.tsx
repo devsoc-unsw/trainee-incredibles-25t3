@@ -126,17 +126,19 @@ export default function SearchPage() {
 
       {/* Filters + Results */}
       <div className="flex flex-row">
-        <Card>
+        <Card className="p-4">
           <CardHeader>
-            Filters
+            <CardTitle>
+              Filters
+            </CardTitle>
+            <CardDescription>
+              Select filters you want to apply to your search
+            </CardDescription>
           </CardHeader>
-          <CardDescription>
-            Select filters you want to apply to your search
-          </CardDescription>
           <CardContent>
             {/* Cuisine */}
             <SearchFilterDropdown 
-              label="cuisine"
+              label="Cuisine"
               value={cuisine}
               setValue={setCuisine}
               open={cuisineSelectOpen}
@@ -146,7 +148,7 @@ export default function SearchPage() {
 
             {/* Price */}
             <SearchFilterDropdown 
-              label="price"
+              label="Price"
               value={price}
               setValue={setPrice}
               open={priceSelectOpen}
@@ -156,7 +158,7 @@ export default function SearchPage() {
 
             {/* Dietary */}
             <SearchFilterDropdown 
-              label="dietary"
+              label="Dietary"
               value={dietary}
               setValue={setDietary}
               open={dietarySelectOpen}
