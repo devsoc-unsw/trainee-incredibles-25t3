@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom'
 import Dashboard from '@/pages/dashboard/Dashboard';
 import RestaurantPage from '@/pages/restaurantPage/RestaurantPage';
+import SearchPage from '@/pages/search/SearchPage';
 
 export default function App() {
 
@@ -8,7 +9,8 @@ export default function App() {
     <div className="app-root">
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/" element={<RestaurantPage />} />
+        <Route path="/restaurant" element={<RestaurantPage />} />
+        <Route path="/search" element={<SearchPage />} />
       </Routes>
     </div>
   );
