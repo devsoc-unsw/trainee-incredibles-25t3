@@ -114,7 +114,14 @@ export default function SearchPage() {
               Sort By
             </CardHeader>
             <CardContent>
-              {/* sorting options */}
+              <div className="flex flex-row">
+                <Button>
+                  Most Popular
+                </Button>
+                <Button>
+                  Highest Rated
+                </Button>
+              </div>
             </CardContent>
           </Card>
         </div>
