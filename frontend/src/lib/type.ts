@@ -40,3 +40,28 @@ export interface DiscoveryRestaurant {
   tags: string[];
 }
 
+export interface Badge {
+  _id: string;
+  icon: string;
+  title: string;
+}
+
+export interface Review {
+  _id: string;
+  restaurant: string; // restaurant._id
+  user: string; // user._id
+  rating: number;
+  content?: string;
+  date: Date;
+}
+
+export interface UserProfile {
+  _id: string;
+  username: string;
+  profilePicture: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  xp: number;
+  badges: Badge[];
+}
