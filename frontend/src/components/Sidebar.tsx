@@ -3,7 +3,6 @@ import { NavLink } from "react-router-dom";
 import { Home, Compass, User, Search, RefreshCw } from "lucide-react";
 import { Button } from "./ui/button";
 import { cn } from "../lib/utils";
-import { ModeToggle } from "@/components/dark-mode/mode-toggle";
 
 const navItems = [
   { label: "For You", to: "/", icon: Home },
@@ -16,9 +15,8 @@ const navItems = [
 const Sidebar: React.FC = () => {
   return (
     <aside className="flex h-screen w-64 flex-col border-r bg-background">
-      <div className="border-b px-6 pt-5 pb-3 flex flex-row justify-between">
-        <h1 className="text-3xl font-semibold tracking-tight">UniBites</h1>
-        <ModeToggle />
+      <div className="border-b px-6 py-5">
+        <h1 className="text-2xl font-semibold tracking-tight">UniBites</h1>
       </div>
       <nav className="flex-1 px-2 py-4 space-y-1">
         {navItems.map((item) => {
