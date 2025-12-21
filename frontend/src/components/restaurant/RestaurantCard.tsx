@@ -15,7 +15,7 @@ export default function RestaurantCard({ restaurant, onClick } : RestaurantCardP
     <button
       type="button"
       onClick={() => onClick(restaurant)}
-      className="relative h-56 overflow-hidden rounded-3xl shadow-md text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background"
+      className="relative h-56 overflow-hidden rounded-3xl shadow-md text-left focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background transition duration-300 ease-in-out hover:-translate-y-2 hover:shadow-lg"
     >
       <div
         className="h-full w-full bg-cover bg-center"
