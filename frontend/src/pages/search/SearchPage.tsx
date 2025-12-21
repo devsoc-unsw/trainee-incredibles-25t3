@@ -1,10 +1,10 @@
 "use client"
 
+/* --------------------------------- Imports -------------------------------- */
+
 import { API_BASE } from "@/api/config";
 import RestaurantCard from "@/components/restaurant/RestaurantCard";
 import RestaurantDetailsSheet from "@/components/restaurant/RestaurantDetailsSheet";
-/* --------------------------------- Imports -------------------------------- */
-
 import { SearchFilterDropdown } from "@/components/SearchFilterDropdown";
 import { Button } from "@/components/ui/button";
 import {
