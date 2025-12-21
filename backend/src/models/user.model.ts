@@ -23,7 +23,7 @@ export interface IUser {
 
 const UserSchema = new Schema<IUser>({
   username: { type: String, required: true },
-  profilePicture: { type: String },
+  profilePicture: { type: String, default: "https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/960px-Default_pfp.svg.png?20220226140232" },
   firstName: { type: String, required: true },
   lastName: { type: String, required: true },
   email: { type: String, required: true, unique: true },
