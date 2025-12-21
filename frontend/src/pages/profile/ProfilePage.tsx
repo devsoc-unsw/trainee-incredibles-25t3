@@ -2,6 +2,8 @@
 
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Item, ItemMedia, ItemTitle } from "@/components/ui/item";
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Badge as BadgeSchema, Review, UserProfile } from "@/lib/type";
 
 /* -------------------------------- Demo User ------------------------------- */
@@ -65,10 +67,10 @@ const user: UserProfile = {
 
 export default function ProfilePage() {
   return (
-    <div className="w-full flex flex-row p-4 gap-4">
+    <div className="w-full flex flex-row p-4 gap-6">
       {/* Profile Card  + Badges*/}
-      <div className="flex flex-col w-1/2">
-        <Card className="rounded-3xl shadow-xl flex flex-row">
+      <div className="flex flex-col w-1/2 gap-6">
+        <Card className="rounded-3xl shadow-lg flex flex-row">
           <CardHeader className="flex flex-row">
             <img alt="profile-picture" src={user.profilePicture} className="w-48 h-48" />
           </CardHeader>
@@ -91,9 +93,30 @@ export default function ProfilePage() {
           </CardContent>
         </Card>
 
-        <div>
-
-        </div>
+        <Card className="border-none h-full w-full shadow-none p-0">
+          <CardHeader className="pl-4">
+            <CardTitle>
+              Badges
+            </CardTitle>
+          </CardHeader>
+          <CardContent className=" pl-4 pr-0">
+            <ScrollArea className="flex flex-col gap-2">
+              {user.badges.map((badge) => (
+                <Item key={badge._id} variant="outline" className="shadow-sm rounded-3xl mb-2">
+                  <ItemMedia>
+                    <div className="text-xl">
+                      {badge.icon}
+                    </div>
+                  </ItemMedia>
+                  <ItemTitle className="text-lg">
+                    {badge.title}
+                  </ItemTitle>
+                </Item>
+              ))}
+              <ScrollBar />
+            </ScrollArea>
+          </CardContent>
+        </Card>
       </div>
 
       {/* Restaurants + Reviews */}
